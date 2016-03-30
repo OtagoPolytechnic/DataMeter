@@ -1,0 +1,54 @@
+<h1>Demo#index</h1>
+<p>Hello world from hello page </p>
+
+<%= 1+1 %>
+
+
+<% target = "world" %>
+<%= "Hello #{target}"%>
+
+
+<% @array.each do |n| %>
+<%= n %>
+<% end %>
+
+<a href="/demo/index"> gello page 1</a><br />
+
+<%= link_to('Hello page 2', {:action => 'index'})%>
+
+ID: <%= params[:id]%>
+ID: <%= @id %>
+Page: <%= @page.to_i + 1 %>
+
+<hr/>
+<%= params.inspect %>
+
+
+<%
+require 'net/scp'
+  # download a file from a remote server
+
+  Net::SCP.download!("192.241.195.165", "root",
+    "/root/Test/Electricity.txt", "C:/Users/cameron/Sites/simple_cms/",
+     :ssh => { :password => "1000002706"})
+%>
+
+<%
+lines = []
+
+file = File.open("C:/Users/cameron/Sites/simple_cms/Electricity.txt", "r")
+
+users = []
+
+while (line = file.gets)
+  arr = line.split(',')
+  users.push({ timestamp: arr[0], device: arr[1], charge1: arr[2], charge2: arr[3], charge3: arr[4], total: arr[5] })
+end
+
+file.close
+
+
+x = users.map { |user| user[:total] }
+x.collect { |x| x.strip!}
+%>
+<%= x.inspect%>

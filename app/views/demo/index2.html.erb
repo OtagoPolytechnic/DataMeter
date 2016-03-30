@@ -1,0 +1,11 @@
+<%
+require 'csv'
+csv_text = File.read('C:/Users/cameron/Google Drive/BITY4/Sites/simple_cms/public/DigitalOcean/Electricity.txt')
+											csv = CSV.parse(csv_text)
+											csv.each do |row|
+											  Meter.create!(row.to_hash)
+											end
+%>
+<%=
+
+%>
